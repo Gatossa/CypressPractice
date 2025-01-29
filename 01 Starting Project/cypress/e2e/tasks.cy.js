@@ -25,12 +25,43 @@ describe("task management", () => {
     cy.get(".task p").contains("Summary of a new task");
   });
 
+  it("should validate the user input", () => {
+    cy.visit("http://localhost:5173/");
+    cy.contains("Add Task").click();
+    cy.get(".modal").contains("Add Task").click();
+    cy.contains("Please provide values");
+  });
 
-  it('shoul validate the user input', () => {
-    cy.visit('http://localhost:5173/');
-    cy.contains('Add Task').click();
-    cy.get('.modal').contains('Add Task').click();
-    cy.contains('Please provide values')
+  it("should filter tasks below the summary", () => {
+    cy.visit("http://localhost:5173/");
 
-  }
+    cy.contains("Add Task").click();
+    cy.get("#title").type("My second task");
+    cy.get("#summary").type("Summary of a second task");
+    cy.get("#category").select("moderate");
+    cy.get(".modal").contains("Add Task").click();
+    cy.get("#filter").select("urgent");
+    cy.get(".task").should("have.length", 0);
+    cy.get("#filter").select("moderate");
+    cy.get(".task").should("have.length", 1);
+    cy.get("#filter").select("all");
+    cy.get(".task").should("have.length", 1);
+  });
+
+  it("should add multiple tasks", () => {
+    cy.visit("http://localhost:5173/");
+    cy.contains("Add Task").click();
+    cy.get("#title").type("My task 1");
+    cy.get("#summary").type("Summary of task 1");
+    cy.get(".modal").contains("Add Task").click();
+    cy.get(".task").should("have.length", 1);
+
+    cy.contains("Add Task").click();
+    cy.get("#title").type("My task 2");
+    cy.get("#summary").type("Summary of task 2");
+    cy.get(".modal").contains("Add Task").click();
+    cy.get(".task").should("have.length", 2);
+    cy.get(".task").eq(0).contains("My task 1");
+    cy.get(".task").eq(1).contains("My task 2");
+  });
 });
