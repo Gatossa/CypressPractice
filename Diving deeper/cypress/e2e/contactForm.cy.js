@@ -7,11 +7,12 @@ describe("contact form", () => {
       "Hello, this is my new test message"
     );
     cy.get('[data-cy="contact-input-name"]').type("Jane Doe");
-    cy.get('[data-cy="contact-input-email"]').type("test@example.pl");
+
     cy.get('[data-cy="contact-btn-submit"]').then((el) => {
       expect(el.attr("disabled")).to.be.undefined;
       expect(el.text()).to.equal("Send Message");
     });
+    cy.get('[data-cy="contact-input-email"]').type("test@example.pl{enter}");
 
     //   .contains("Send Message")
     //   .should("not.have.attr", "disabled");
