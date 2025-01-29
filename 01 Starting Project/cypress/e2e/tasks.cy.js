@@ -23,8 +23,14 @@ describe("task management", () => {
     cy.get(".task").should("have.length", 1);
     cy.get(".task h2").contains("My new task");
     cy.get(".task p").contains("Summary of a new task");
-
-    //cy.contains('Save').click();
-    //cy.contains('New Task').should('exist');
   });
+
+
+  it('shoul validate the user input', () => {
+    cy.visit('http://localhost:5173/');
+    cy.contains('Add Task').click();
+    cy.get('.modal').contains('Add Task').click();
+    cy.contains('Please provide values')
+
+  }
 });
