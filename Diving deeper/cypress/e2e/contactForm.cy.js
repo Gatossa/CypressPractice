@@ -10,13 +10,14 @@ describe("contact form", () => {
     cy.get('[data-cy="contact-input-email"]').type("test@example.pl");
     cy.get('[data-cy="contact-btn-submit"]').then((el) => {
       expect(el.attr("disabled")).to.be.undefined;
+      expect(el.text()).to.equal("Send Message");
     });
 
     //   .contains("Send Message")
     //   .should("not.have.attr", "disabled");
-    cy.get('[data-cy="contact-btn-submit"]')
-      .click()
-      .contains("Sending...")
-      .should("have.attr", "disabled");
+    cy.get('[data-cy="contact-btn-submit"]').as("subBtn");
+    cy.get("@subBtn").click();
+    cy.get("@subBtn").contains("Sending...");
+    cy.get("@subBtn").should("have.attr", "disabled");
   });
 });
