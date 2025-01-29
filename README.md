@@ -4,4 +4,4 @@ Practising Cypress is based on two courses:
 
 -'The Complete Cypress v13 Course- Automation Testing Bootcamp'- 36 hours of training
 
-So far I am absolutely delighted with this tool :-)
+So far I am absolutely delighted with this tool :monocle_face:
