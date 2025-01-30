@@ -21,4 +21,31 @@ describe("contact form", () => {
     cy.get("@subBtn").contains("Sending...");
     cy.get("@subBtn").should("have.attr", "disabled");
   });
+
+  it("should validate the form input", () => {
+    cy.visit("http://localhost:5173/about");
+    cy.get('[data-cy="contact-btn-submit"]').click();
+    cy.get('[data-cy="contact-btn-submit"]').then((el) => {
+      expect(el).not.to.have.attr("disabled");
+      expect(el.text()).to.not.equal("Sending ..");
+
+      cy.get('[data-cy="contact-input-message"]').as("msgInput");
+      cy.get("@msgInput").focus().blur();
+      cy.get("@msgInput")
+        .parent()
+        .should("have.attr", "class")
+        .and("match", /invalid/);
+      cy.get('[data-cy="contact-input-name"]').focus().blur();
+      cy.get('[data-cy="contact-input-name"]')
+        .parent()
+        .should("have.attr", "class")
+        .and("match", /invalid/);
+
+      cy.get('[data-cy="contact-input-email"]').focus().blur();
+      cy.get('[data-cy="contact-input-email"]')
+        .parent()
+        .should("have.attr", "class")
+        .and("match", /invalid/);
+    });
+  });
 });
