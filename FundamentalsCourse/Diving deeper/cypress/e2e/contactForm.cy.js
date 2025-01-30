@@ -21,6 +21,7 @@ describe("contact form", () => {
     cy.get("@subBtn").contains("Sending...");
     cy.get("@subBtn").should("have.attr", "disabled");
   });
+  cy.screenshot();
 
   it("should validate the form input", () => {
     cy.visit("http://localhost:5173/about");
