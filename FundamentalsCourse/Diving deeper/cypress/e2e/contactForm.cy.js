@@ -21,7 +21,6 @@ describe("contact form", () => {
     cy.get("@subBtn").contains("Sending...");
     cy.get("@subBtn").should("have.attr", "disabled");
   });
-  cy.screenshot();
 
   it("should validate the form input", () => {
     cy.visit("http://localhost:5173/about");
@@ -45,8 +44,10 @@ describe("contact form", () => {
       cy.get('[data-cy="contact-input-email"]').focus().blur();
       cy.get('[data-cy="contact-input-email"]')
         .parent()
-        .should("have.attr", "class")
-        .and("match", /invalid/);
+        .should((el) => {
+          expect(el.attr("class")).contains("invalid");
+          expect(el.attr("class")).not.to.be.undefined;
+        });
     });
   });
 });
