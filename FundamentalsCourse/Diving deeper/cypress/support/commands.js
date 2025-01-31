@@ -1,5 +1,10 @@
-cypress.commands.add("submitForm", () => {
+Cypress.Commands.add("submitForm", () => {
   cy.get('[data-cy="contact-btn-submit"]').click();
+});
+Cypress.Commands.addQuery("getById", (id) => {
+  return () => {
+    return cy.get(`[data-cy="${id}"]`);
+  };
 });
 // ***********************************************
 // This example commands.js shows you how to
