@@ -42,11 +42,11 @@ describe("share location", () => {
         new RegExp(`${latitude}.*${longitude}.*${encodeURI("Anne Dave")}`)
       );
     });
-    cy.get("@storeLocation").should("have.been.called");
-    cy.get("@storeLocation").should(
-      "have.been.calledWith",
-      "location",
-      JSON.stringify(fakePosition)
-    );
+    cy.get("@saveLocation").should("have.been.called");
+    cy.get('[data-cy="share-loc-btn"]').click();
+    cy.get("[data-cy=info-message]").should("be.visible");
+    cy.clock();
+    cy.tick(2000);
+    cy.get("[data-cy=info-message]").should("not.be.visible");
   });
 });
