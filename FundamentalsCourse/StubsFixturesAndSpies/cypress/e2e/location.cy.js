@@ -17,6 +17,8 @@ describe("share location", () => {
       cy.stub(win.navigator.clipboard, "writeText")
         .as("saveToClipboard")
         .resolves();
+      cy.spy(win.localStorage, "setItem").as("saveLocation");
+      cy.spy(win.localStorage, "getItem").as("getStoredLocation");
     });
   });
 
@@ -40,5 +42,11 @@ describe("share location", () => {
         new RegExp(`${latitude}.*${longitude}.*${encodeURI("Anne Dave")}`)
       );
     });
+    cy.get("@storeLocation").should("have.been.called");
+    cy.get("@storeLocation").should(
+      "have.been.calledWith",
+      "location",
+      JSON.stringify(fakePosition)
+    );
   });
 });
