@@ -8,12 +8,15 @@ describe("contact form", () => {
     cy.get('[data-cy="contact-input-message"]').type(
       "Hello, this is my new test message"
     );
+
     cy.get('[data-cy="contact-input-name"]').type("Jane Doe");
 
     cy.get('[data-cy="contact-btn-submit"]').then((el) => {
       expect(el.attr("disabled")).to.be.undefined;
       expect(el.text()).to.equal("Send Message");
     });
+
+    cy.screenshot();
     cy.get('[data-cy="contact-input-email"]').type("test@example.pl{enter}");
 
     //   .contains("Send Message")
@@ -25,7 +28,7 @@ describe("contact form", () => {
   });
 
   it("should validate the form input", () => {
-    cy.get('[data-cy="contact-btn-submit"]').click();
+    cy.submitForm();
     cy.get('[data-cy="contact-btn-submit"]').then((el) => {
       expect(el).not.to.have.attr("disabled");
       expect(el.text()).to.not.equal("Sending ..");

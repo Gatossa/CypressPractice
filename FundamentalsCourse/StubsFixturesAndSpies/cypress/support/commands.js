@@ -1,6 +1,3 @@
-cypress.commands.add("submitForm", () => {
-  cy.get('[data-cy="contact-btn-submit"]').click();
-});
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
