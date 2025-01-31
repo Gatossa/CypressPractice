@@ -2,6 +2,7 @@
 
 describe("share location", () => {
   beforeEach(() => {
+    cy.clock();
     cy.fixture("user-location.json").as("userLocation");
     cy.visit("/").then((win) => {
       cy.get("@userLocation").then((fakePosition) => {
@@ -45,7 +46,7 @@ describe("share location", () => {
     cy.get("@saveLocation").should("have.been.called");
     cy.get('[data-cy="share-loc-btn"]').click();
     cy.get("[data-cy=info-message]").should("be.visible");
-    cy.clock();
+
     cy.tick(2000);
     cy.get("[data-cy=info-message]").should("not.be.visible");
   });
