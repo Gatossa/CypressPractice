@@ -15,6 +15,9 @@ describe("share location", () => {
             });
           }, 100);
         });
+      cy.stub(win.navigator.clipboard, "writeText")
+        .as("saveToClipboard")
+        .resolves();
     });
   });
 
@@ -29,6 +32,6 @@ describe("share location", () => {
     cy.get('[data-cy="name-input"]').type("Anne Dave");
     cy.get('[data-cy="get-loc-btn"]').click();
     cy.get('[data-cy="share-loc-btn"]').click();
-    cy.get('[data-cy="location-url"]').should("exist");
+    cy.get("@saveToClipboard").should("have.been.called");
   });
 });
