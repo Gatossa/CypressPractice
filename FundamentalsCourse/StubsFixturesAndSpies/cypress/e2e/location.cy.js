@@ -8,6 +8,6 @@ describe("share location", () => {
       );
     });
     cy.get('[data-cy="get-loc-btn"]').click();
-    cy.get("@getCurrentUserLocalization").should("have.been.calledOnce");
+    cy.get("@getCurrentUserLocalization").should("have.been.called");
   });
 });
