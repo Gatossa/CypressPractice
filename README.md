@@ -1,6 +1,6 @@
 Practising Cypress is based on two courses:
 
--'Cypress End-to-End Testing - Getting Started' by Udemy- 6 hours of training => Finished
+-'Cypress End-to-End Testing - Getting Started' by Udemy- 6 hours of training => Finished, folder FundamentalsCourse
 
 -'The Complete Cypress v13 Course- Automation Testing Bootcamp' by Udemy- 36 hours of training
 
